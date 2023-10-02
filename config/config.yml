@@ -1,0 +1,20 @@
+version: 0.1
+auth:
+  token:
+    realm: "https://localhost:5001/auth"
+    service: "Docker registry"
+    issuer: "Acme auth server"
+    rootcertbundle: "/certs/domain.crt"
+http:
+  addr: :5000
+  tls:
+    certificate: /certs/domain.crt
+    key: /certs/domain.key
+  headers:
+    X-Content-Type-Options: [nosniff]
+log:
+  fields:
+    service: registry
+storage:
+  filesystem:
+    rootdirectory: /var/lib/registry

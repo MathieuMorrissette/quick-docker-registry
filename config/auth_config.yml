@@ -1,0 +1,23 @@
+server:
+  addr: ":5001"
+  certificate: "/certs/domain.crt"
+  key: "/certs/domain.key"
+
+token:
+  issuer: "Acme auth server"
+  expiration: 900
+
+users:
+  "write": # htpasswd -n username 
+    password: "$2y$05$WuwBasGDAgr.QCbGIjKJaep4dhxeai9gNZdmBnQXqpKly57oNutya" # 123 
+
+  "read":
+    password: "$2y$05$WuwBasGDAgr.QCbGIjKJaep4dhxeai9gNZdmBnQXqpKly57oNutya" # 123 
+
+acl:
+  - match: {account: "write"}
+    actions: ["*"]
+    comment: "Admin has full access to everything."
+  - match: {account: "read"}
+    actions: ["pull"]
+    comment: "User \"test\" can pull stuff."
